@@ -17,8 +17,8 @@ This Action expects the following to be true:
 | `version` | The Jazzy version to run. Defaults to latest | No
 | `branch` | Branch to deploy on - default: gh-pages | No |
 | `history` | Maintain branch history - default: true | No
-| `sourcekittenVersion` | The version of sourcekitten to use | No
-| `sourcekittenOutputPath` | The output path for sourcekitten's json file | No
+| `sourcekitten_version` | The version of sourcekitten to use | No
+| `sourcekitten_output_path` | The output path for sourcekitten's json file | No
 
 ## Usage
 Documentation generation can be as minimal as the following:
@@ -33,9 +33,9 @@ jobs:
   deploy_docs:
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Publish Jazzy Docs
-      uses: steven0351/publish-jazzy-docs@v1
+      uses: jocosocial/publish-jazzy-docs@v2
       with:
         personal_access_token: ${{ secrets.ACCESS_TOKEN }}
 ```
@@ -44,7 +44,7 @@ Specify a Jazzy config file:
 ```yaml
 ...
     - name: Publish Jazzy Docs
-      uses: steven0351/publish-jazzy-docs@v1
+      uses: jocosocial/publish-jazzy-docs@v2
       with:
         personal_access_token: ${{ secrets.ACCESS_TOKEN }}
         config: .jazzy.yml
@@ -54,7 +54,7 @@ Pass CLI args:
 ```yaml
 ...
     - name: Publish Jazzy Docs
-      uses: steven0351/publish-jazzy-docs@v1
+      uses: jocosocial/publish-jazzy-docs@v2
       with:
         personal_access_token: ${{ secrets.ACCESS_TOKEN }}
         args: "--theme fullwidth --author Johnny Appleseed"
@@ -64,7 +64,7 @@ Specify a Jazzy version:
 ```yaml
 ...
     - name: Publish Jazzy Docs
-      uses: steven0351/publish-jazzy-docs@v1
+      uses: jocosocial/publish-jazzy-docs@v2
       with:
         personal_access_token: ${{ secrets.ACCESS_TOKEN }}
         version: 0.11.2

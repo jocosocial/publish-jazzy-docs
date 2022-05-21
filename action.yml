@@ -19,10 +19,10 @@ inputs:
   personal_access_token:
     description: "Personal access token"
     required: true
-  sourcekittenVersion:
+  sourcekitten_version:
     description: "sourcekitten version"
     required: false
-  sourcekittenOutputPath:
+  sourcekitten_output_path:
     description: "Output path for sourcekitten's json file"
     required: false
 runs:
