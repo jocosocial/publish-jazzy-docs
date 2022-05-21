@@ -12,9 +12,12 @@ shell.config.fatal = true
 var branch = core.getInput("branch")
 var history = core.getInput("history")
 const jazzyVersion = core.getInput("version")
+const sourcekittenVersion = core.getInput("sourcekittenVersion")
+const sourcekittenOutputPath = core.getInput("sourcekittenOutputPath")
 const configFilePath = core.getInput("config")
 const jazzyArgs = core.getInput("args")
 const token = core.getInput("personal_access_token")
+const defaultSourcekittenPath = '/tmp/doc.json'
 
 if (branch == '' || branch == null || branch == undefined) {
     branch = "gh-pages"
@@ -25,6 +28,24 @@ if (history == '' || history == null || history == undefined) {
 }
 
 const remote = `https://${token}@github.com/${context.repo.owner}/${context.repo.repo}.git`
+
+const generateSourcekittenInstallCommand = () => {
+  let sourcekittenInstall = "brew install sourcekitten"
+
+  if (sourcekittenVersion) {
+    sourcekittenInstall += `:${sourcekittenVersion}`
+  }
+
+  return sourcekittenInstall
+}
+
+const generateSourcekittenArguments = () => {
+  let outputPath = sourcekittenOutputPath ? sourcekittenOutputPath : defaultSourcekittenPath
+
+  let command = `sourcekitten doc --spm > ${outputPath}`
+
+  return command
+}
 
 const generateJazzyInstallCommand = () => {
   let gemInstall = "sudo gem install jazzy"
@@ -37,7 +58,9 @@ const generateJazzyInstallCommand = () => {
 }
 
 const generateJazzyArguments = () => {
-  let command = `jazzy`
+  let sourceFile = sourcekittenOutputPath ? sourcekittenOutputPath : defaultSourcekittenPath
+
+  let command = `jazzy --sourcekitten-sourcefile ${sourceFile}`
 
   if (jazzyArgs) {
     command += ` ${jazzyArgs}`
@@ -93,7 +116,9 @@ const getDocumentationFolder = () => {
 }
 
 const generateAndDeploy = () => {
+  shell.exec(generateSourcekittenInstallCommand())
   shell.exec(generateJazzyInstallCommand())
+  shell.exec(generateSourcekittenArguments())
   shell.exec(generateJazzyArguments())
   var folder = getDocumentationFolder()
   if (folder.charAt(folder.length - 1) != '/') {
