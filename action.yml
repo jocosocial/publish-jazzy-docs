@@ -19,6 +19,12 @@ inputs:
   personal_access_token:
     description: "Personal access token"
     required: true
+  sourcekittenVersion:
+    description: "sourcekitten version"
+    required: false
+  sourcekittenOutputPath:
+    description: "Output path for sourcekitten's json file"
+    required: false
 runs:
   using: "node12"
   main: "dist/index.js"

@@ -19,6 +19,8 @@ This Action expects the following to be true:
 | `version` | The Jazzy version to run. Defaults to latest | No
 | `branch` | Branch to deploy on - default: gh-pages | No |
 | `history` | Maintain branch history - default: true | No
+| `sourcekittenVersion` | The version of sourcekitten to use | No
+| `sourcekittenOutputPath` | The output path for sourcekitten's json file | No
 
 ## Usage
 Documentation generation can be as minimal as the following:
