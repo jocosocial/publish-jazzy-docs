@@ -33,7 +33,7 @@ const generateSourcekittenInstallCommand = () => {
   let sourcekittenInstall = "brew install sourcekitten"
 
   if (sourcekittenVersion) {
-    sourcekittenInstall += `:${sourcekittenVersion}`
+    sourcekittenInstall += `@${sourcekittenVersion}`
   }
 
   return sourcekittenInstall
