@@ -26,7 +26,7 @@ inputs:
     description: "Output path for sourcekitten's json file"
     required: false
 runs:
-  using: "node18"
+  using: "node16"
   main: "dist/index.js"
 branding:
   icon: "book"
